@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">QRCodeScanner</string>
+    <string name="read_qrcode">Ler QRCode</string>
+    <string name="qrcode_info">Informações do QRCode</string>
+</resources>
