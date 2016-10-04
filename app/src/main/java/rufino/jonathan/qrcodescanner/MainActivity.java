@@ -10,6 +10,8 @@ import android.util.Log;
 import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.gms.vision.CameraSource;
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
     private SurfaceView cameraView;
     private TextView qrcodeData;
+    private Button readQRCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +44,19 @@ public class MainActivity extends AppCompatActivity {
         context = this;
         cameraView = (SurfaceView) findViewById(R.id.camera_view);
         qrcodeData = (TextView) findViewById(R.id.qrcode_data);
+        readQRCode = (Button) findViewById(R.id.read_qrcode);
 
         detector = new BarcodeDetector.Builder(context).setBarcodeFormats(Barcode.QR_CODE).build();
         cameraSource = new CameraSource.Builder(context, detector).setRequestedPreviewSize(CAMERA_WIDTH, CAMERA_HEIGTH).build();
+
+        readQRCode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                readQRCode.setVisibility(View.GONE);
+                qrcodeData.setVisibility(View.GONE);
+                cameraView.setVisibility(View.VISIBLE);
+            }
+        });
 
         cameraView.getHolder().addCallback(new SurfaceHolder.Callback() {
             @Override
@@ -85,6 +98,9 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             qrcodeData.setText(barcodes.valueAt(0).rawValue);
+                            cameraView.setVisibility(View.GONE);
+                            readQRCode.setVisibility(View.VISIBLE);
+                            qrcodeData.setVisibility(View.VISIBLE);
                         }
                     });
                 }

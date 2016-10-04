@@ -1,25 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/activity_vertical_margin"
-    tools:context="rufino.jonathan.qrcodescanner.MainActivity">
+    tools:context="rufino.jonathan.qrcodescanner.MainActivity"
+    android:animateLayoutChanges="true">
+
+    <Button
+        android:id="@+id/read_qrcode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/camera" />
 
     <SurfaceView
         android:id="@+id/camera_view"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"/>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/qrcode_data"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:layout_below="@id/camera_view"
-        android:text="@string/qrcode_data"/>
-</RelativeLayout>
+        android:text="@string/qrcode_data"
+        android:layout_gravity="center|bottom"
+        android:visibility="gone"/>
+</FrameLayout>
